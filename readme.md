@@ -25,3 +25,34 @@ All subdomains are required for the company to work in its business domain. The 
 ![Domain Schematic](./domain-schematic.png)
 
 > It’s developers’ (mis)understanding, not domain experts’ knowledge, that gets released in production.
+
+domain experts: it’s their job to specialize in and comprehend all the intricacies of the business domain. By no means should we, nor can we, become domain experts. That said, it’s crucial for us to understand domain experts and to use the same business terminology they use.
+
+> As Alberto Brandolini1 says, software development is a learning process; working code is a side effect. A software project’s success depends on the effectiveness of knowledge sharing between domain experts and software engineers. We have to understand the problem in order to solve it
+
+Research into why software projects fail has shown that effective communication is essential for knowledge sharing and project success
+
+![knowledge sharing](./knowledge-sharing.png)
+
+During the traditional software development lifecycle, the domain knowledge is “translated” into an engineer-friendly form known as an analysis model, which is a description of the system’s requirements rather than an understanding of the business domain behind it. While the intentions may be good, such mediation is hazardous to knowledge sharing. 
+
+## Ubiquitous Language
+Using a ubiquitous language is the cornerstone practice of domain-driven design. The idea is simple: if parties need to communicate efficiently, instead of relying on translations, they have to speak the same language.
+
+- Domain knowledge into an analysis model
+- Analysis model into requirements
+- Requirements into system design
+- System design into source code
+
+The ubiquitous language must be precise and consistent. It should eliminate the need for assumptions and should make the business domain’s logic explicit.
+
+- each term of the ubiquitous language should have one and only one meaning
+- Two terms cannot be used interchangeably in a ubiquitous language.
+
+## Model
+A model is a simplified representation of a thing or phenomenon that intentionally emphasizes certain aspects while ignoring others. Abstraction with a specific use in mind. _A model is not a copy of the real world but a human construct that helps us make sense of real-world systems._ 
+
+**All models have a purpose, and an effective model contains only the details needed to fulfill its purpose** In its essence, a model is an abstraction. The notion of abstraction allows us to handle complexity by omitting unnecessary details and leaving only what’s needed for solving the problem at hand.
+> the purpose of abstracting is not to be vague but to create a new semantic level in which one can be absolutely precise.
+
+Despite the obvious advantages of maintaining a glossary of project-related terminology, it has an inherent limitation. Glossaries work best for “nouns”: names of entities, processes, roles, and so on. Although nouns are important, capturing the behavior is crucial.
