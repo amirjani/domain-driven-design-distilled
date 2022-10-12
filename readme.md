@@ -14,15 +14,15 @@ _A company can operate in multiple business domains._
 ## Subdomain
 To achieve its business domain’s goals and targets, a company has to operate in multiple subdomains. A subdomain is a fine-grained area of business activity. _The subdomains have to interact with each other to achieve the company’s goals in its business domain._ 
 
-![Subdomain Types](./subdomains-compare.png)
+![Subdomain Types](./assets/subdomains-compare.png)
 
 Contrary to the core subdomains, supporting subdomains do not change often. 
 
 All subdomains are required for the company to work in its business domain. The subdomains are like foundational building blocks: take one away and the whole structure may fall. Since core subdomains’ requirements are expected to change often and continuously, the solution must be maintainable and easy to evolve. Thus, core subdomains require the implementation of the most advanced engineering techniques
 
-![Subdomain Differ](./subdomains-differ.png)
+![Subdomain Differ](./assets/subdomains-differ.png)
 
-![Domain Schematic](./domain-schematic.png)
+![Domain Schematic](./assets/domain-schematic.png)
 
 > It’s developers’ (mis)understanding, not domain experts’ knowledge, that gets released in production.
 
@@ -32,7 +32,7 @@ domain experts: it’s their job to specialize in and comprehend all the intrica
 
 Research into why software projects fail has shown that effective communication is essential for knowledge sharing and project success
 
-![knowledge sharing](./knowledge-sharing.png)
+![knowledge sharing](./assets/knowledge-sharing.png)
 
 During the traditional software development lifecycle, the domain knowledge is “translated” into an engineer-friendly form known as an analysis model, which is a description of the system’s requirements rather than an understanding of the business domain behind it. While the intentions may be good, such mediation is hazardous to knowledge sharing. 
 
@@ -83,5 +83,47 @@ It can be said that domain-driven design’s bounded contexts are based on the l
 
 
 ## Integrating Bounded Contexts
-Moreover, models in different bounded contexts can be evolved and implemented independently. That said, bounded contexts themselves are not independent. Just as a system cannot be built out of independent components—the components have to interact with one another to achieve the system’s overarching goals—so, too, do the implementations in bounded contexts. Although they can evolve independently, they have to integrate with one another. As a result, there will always be touchpoints between bounded contexts. These are called contracts.
+Moreover, models in different bounded contexts can be evolved and implemented independently. That said, bounded contexts themselves are not independent. Just as a system cannot be built out of independent components—the components have to interact with one another to achieve the system’s overarching goals—so, too, do the implementations in bounded contexts. Although they can evolve independently, they have to integrate. As a result, there will always be touchdowns between bounded contexts. These are called contracts.
 
+
+- **Partnership**
+
+Bounded contexts are integrated in an ad hoc manner.
+![Partnership](./assets/partnership.png)
+- **Shared kernel**
+
+Two or more bounded contexts are integrated by sharing a limited overlapping model that belongs to all participating bounded contexts.
+
+It’s crucial to stress that the shared model is designed according to the needs of all of the bounded contexts.
+
+![shared kernel](./assets/shared-kernel.png)
+
+The overarching applicability criterion for the shared kernel pattern is the cost of duplication versus the cost of coordination 
+
+the shared kernel will naturally be applied for the subdomains that change the most: the core subdomains.
+
+- **Conformist**
+![Customer Supplier](./assets/customer-supplier.png)
+The consumer conforms to the service provider’s model.
+![Conformist](./assets/conformist.png)
+- **Anticorruption layer**
+
+The consumer translates the service provider’s model into a model that fits the consumer’s needs.
+
+![Anticorruption](./assets/anticorruption.png)
+
+- **Open-host service**
+
+The service provider implements a published language—a model optimized for its consumers’ needs.
+
+![open-host](./assets/open-host.png)
+
+![open-host](./assets/open-host-2.png)
+- **Separate ways**
+It’s less expensive to duplicate particular functionality than to collaborate and integrate it.
+
+# Context Map
+
+After analyzing the integration patterns between a system’s bounded contexts, we can plot them on a context map. The context map is a visual representation of the system’s bounded contexts and the integrations between them. 
+
+![context map](./assets/context-map.png)
