@@ -102,10 +102,15 @@ The overarching applicability criterion for the shared kernel pattern is the cos
 
 the shared kernel will naturally be applied for the subdomains that change the most: the core subdomains.
 
+
 - **Conformist**
+
 ![Customer Supplier](./assets/customer-supplier.png)
+
 The consumer conforms to the service provider’s model.
+
 ![Conformist](./assets/conformist.png)
+
 - **Anticorruption layer**
 
 The consumer translates the service provider’s model into a model that fits the consumer’s needs.
