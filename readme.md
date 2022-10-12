@@ -100,7 +100,7 @@ It’s crucial to stress that the shared model is designed according to the need
 
 The overarching applicability criterion for the shared kernel pattern is the cost of duplication versus the cost of coordination 
 
-the shared kernel will naturally be applied for the subdomains that change the most: the core subdomains.
+the shared kernel will naturally be applied to the subdomains that change the most: the core subdomains.
 
 
 - **Conformist**
@@ -132,3 +132,30 @@ It’s less expensive to duplicate particular functionality than to collaborate 
 After analyzing the integration patterns between a system’s bounded contexts, we can plot them on a context map. The context map is a visual representation of the system’s bounded contexts and the integrations between them. 
 
 ![context map](./assets/context-map.png)
+
+# Implementation 
+
+Business logic is the most important part of the software. It’s the reason the software is being implemented in the first place. A system’s user interface can be sexy and its database can be blazing fast and scalable. But if the software is not useful for the business, it’s nothing but an expensive technology demo.
+
+## Transaction Script
+> Organizes business logic by procedures where each procedure handles a single request from the presentation. "Martin Fowler"
+
+The only requirement procedures have to fulfill is transactional behavior. Each operation should either succeed or fail but can never result in an invalid state. 
+
+The thing is, the transaction script pattern is a foundation for the more advanced business logic implementation patterns
+
+data corruption problem can lead to: 
+- Lack of transactional behavior
+- Distributed transactions
+- Implicit distributed transactions
+
+## Active Record
+> An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data
+
+Consequently, this pattern uses dedicated objects, known as active records, to represent complicated data structures.
+
+## Be Pragmatic
+Although business data is important and the code we design and build should protect its integrity, there are cases in which a pragmatic approach is more desirable.
+Especially at high levels of scale, there are cases when data consistency guarantees can be relaxed. Check whether corrupting the state of one record out of 1 million is really a showstopper for the business and whether it can negatively affect the performance and profitability of the business. For example, let’s assume you are building a system that ingests billions of events per day from IoT devices. Is it a big deal if 0.001% of the events will be duplicated or lost?
+As always, there are no universal laws. It all depends on the business domain you are working in. It’s OK to “cut corners” where possible; just make sure you evaluate the risks and business implications.
+
