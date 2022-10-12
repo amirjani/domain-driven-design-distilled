@@ -224,3 +224,58 @@ Since all objects contained by an aggregate share the same transactional boundar
 
 A domain service is a stateless object that implements business logic. In the vast majority of cases, such logic orchestrates calls to various components of the system to perform some calculation or analysis.
 
+# Architectural Patterns
+
+The variety of concerns that a codebase has to take care of makes it easy for its business logic to become diffused among the different components: that is, for some of the logic to be implemented in the user interface or database, or be duplicated in different components.
+
+Lacking strict organization in implementation concerns makes the codebase hard to change. When the business logic has to change, it may not be evident what parts of the codebase have to be affected by the change. The change may have unexpected effects on seemingly unrelated parts of the system. Conversely, it may be easy to miss code that has to be modified. All of these issues dramatically increase the cost of maintaining the codebase.
+
+## Layered Architecture
+
+![three-layered-architecture](./assets/three-layered-architecture.png)
+
+In its classic form, the layered architecture consists of three layers: the presentation layer (PL), the business logic layer (BLL), and the data access layer (DAL).
+
+- Presentation layer = user interface layer
+- Service layer = application layer
+- Business logic layer = domain layer = model layer
+- Data access layer = infrastructure layer
+
+## Ports & Adapters
+
+The ports & adapters architecture addresses the shortcomings of the layered architecture and is a better fit for the implementation of more complex business logic. Interestingly, both patterns are quite similar.
+
+The dependency inversion principle (DIP) states that high-level modules, which implement the business logic, should not depend on low-level modules. However, that’s precisely what happens in the traditional layered architecture. The business logic layer depends on the infrastructure layer. 
+
+![ports-adapters](./assets/ports-and-adapters.png)
+
+The core goal of the ports & adapters architecture is to decouple the system’s business logic from its infrastructural components.
+
+## Command-Query Responsibility Segregation
+
+The command-query responsibility segregation (CQRS) pattern is based on the same organizational principles for business logic and infrastructural concerns as ports & adapters. It differs, however, in the way the system’s data is managed. This pattern enables representation of the system’s data in multiple persistent models
+
+Another reason for working with multiple models may have to do with the notion of polyglot persistence. There is no perfect database. Or, as Greg Young6 says, all databases are flawed, each in its own way: we often have to balance the needs for scale, consistency, or supported querying models.
+
+Originally, CQRS was defined to address the limited querying possibilities of an event-sourced model: it is only possible to query events of one aggregate instance at a time
+
+As the name suggests, the pattern segregates the responsibilities of the system’s models. There are two types of models: the command execution model and the read models.
+
+CQRS devotes a single model to executing operations that modify the system’s state (system commands). This model is used to implement the business logic, validate rules, and enforce invariants.
+
+![cqrs](./assets/cqrs.png)
+
+### Projecting Read Models
+
+1. Synchronous
+
+For the catch-up subscription to work, the command execution model has to check‐ point all the appended or updated database records. The storage mechanism should also support the querying of records based on the checkpoint.
+
+![sync cqrs](./assets/sync-cqrs.png)
+
+2. Asynchronous projections
+
+In the asynchronous projection scenario, the command execution model publishes all committed changes to a message bus. The system’s projection engines can subscribe to the published messages and use them to update the read models
+
+![async cqrs](./assets/async-cqrs.png)
+
