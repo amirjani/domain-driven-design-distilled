@@ -200,3 +200,27 @@ static void Main(string[] args) {
     // ...
 }
 ```
+
+## Aggregates
+
+A hierarchy of entities sharing a transactional boundary. All of the data included in an aggregate’s boundary has to be strongly consistent to implement its business logic.
+
+An aggregate is an entity: it requires an explicit identification field and its state is expected to change during an instance’s lifecycle. However, it is much more than just an entity. The goal of the pattern is to protect the consistency of its data. Since an aggregate’s data is mutable, there are implications and challenges that the pattern has to address to keep its state consistent at all times.
+
+**aggregate’s state can only be modified by its own business logic, Furthermore, no system operation can assume a multi-aggregate transaction. A change to an aggregate’s state can only be committed individually, one aggregate per database transaction.**
+
+DDD prescribes that a system’s design should be driven by its business domain. Aggregates are no exception. To support changes to multiple objects that have to be applied in one atomic transaction, the aggregate pattern resembles a hierarchy of entities, all sharing transactional consistency
+
+![aggregate hierarchy](./assets/agg-hirarchy.png)
+
+The hierarchy contains both entities and value objects, and all of them belong to the same aggregate if they are bound by the domain’s business logic.
+That’s why the pattern is named “aggregate”: it aggregates business entities and value objects that belong to the same transaction boundary.
+
+Since all objects contained by an aggregate share the same transactional boundary, performance and scalability issues may arise if an aggregate grows too large.
+
+![agg consistency](./assets/agg-data-1.png)
+
+## Domain services
+
+A domain service is a stateless object that implements the business logic. In the vast majority of cases, such logic orchestrates calls to various components of the system to perform some calculation or analysis.
+
