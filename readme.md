@@ -222,5 +222,5 @@ Since all objects contained by an aggregate share the same transactional boundar
 
 ## Domain services
 
-A domain service is a stateless object that implements the business logic. In the vast majority of cases, such logic orchestrates calls to various components of the system to perform some calculation or analysis.
+A domain service is a stateless object that implements business logic. In the vast majority of cases, such logic orchestrates calls to various components of the system to perform some calculation or analysis.
 
