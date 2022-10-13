@@ -269,7 +269,7 @@ CQRS devotes a single model to executing operations that modify the system’s s
 
 1. Synchronous
 
-For the catch-up subscription to work, the command execution model has to check‐ point all the appended or updated database records. The storage mechanism should also support the querying of records based on the checkpoint.
+For the catch-up subscription to work, the command execution model has to checkpoint all the appended or updated database records. The storage mechanism should also support the querying of records based on the checkpoint.
 
 ![sync cqrs](./assets/sync-cqrs.png)
 
@@ -278,4 +278,11 @@ For the catch-up subscription to work, the command execution model has to check�
 In the asynchronous projection scenario, the command execution model publishes all committed changes to a message bus. The system’s projection engines can subscribe to the published messages and use them to update the read models
 
 ![async cqrs](./assets/async-cqrs.png)
+
+# EventStorming
+
+EventStorming is a low-tech activity for a group of people to brainstorm and rapidly model a business process. In a sense, EventStorming is a tactical tool for sharing business domain knowledge.
+
+An EventStorming session has a scope: the business process that the group is interested in exploring.
+
 
